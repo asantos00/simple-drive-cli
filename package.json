@@ -1,0 +1,32 @@
+{
+  "name": "simple-drive-cli",
+  "version": "1.0.0",
+  "description": "A simple cli tool that let you interact with your files on google drive",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape tests/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asantos00/simple-drive-cli.git"
+  },
+  "keywords": [
+    "drive",
+    "google",
+    "cli",
+    "node"
+  ],
+  "author": "ampsantos0",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/asantos00/simple-drive-cli/issues"
+  },
+  "homepage": "https://github.com/asantos00/simple-drive-cli#readme",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "tape": "^4.5.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0"
+  }
+}

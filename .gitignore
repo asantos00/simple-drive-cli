@@ -37,4 +37,5 @@ node_modules
 *.swo
 
 # Configuration json
-*.json
+client_id.json
+credentials.json
