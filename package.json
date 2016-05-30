@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/asantos00/simple-drive-cli#readme",
   "dependencies": {
+    "googleapis": "^7.1.0",
     "minimist": "^1.2.0",
     "tape": "^4.5.1"
   },
