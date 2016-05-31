@@ -1,3 +1,4 @@
+'use strict'
 const fs = require('fs');
 const driveLite = require('./index'); 
 const utility = require('./utility')

@@ -15,7 +15,7 @@ ___
 # Install
 
 ```
-git clone [project]
+git clone https://github.com/asantos00/simple-drive-cli
 npm i
 ```
 

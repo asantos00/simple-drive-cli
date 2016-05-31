@@ -1,4 +1,4 @@
-
+'use strict'
 const concatAllButFirst = (acc, val, idx) => {
   if(!idx) return acc;
   acc.push(val)

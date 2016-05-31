@@ -1,3 +1,4 @@
+'use strict'
 const utility = require('./utility');
 
 const showFileList = files => {
