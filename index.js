@@ -1,13 +1,11 @@
 'use strict';
 
-const fs = require('fs');
-const google = require('googleapis')
-// Full access - Be careful
-const SCOPES = ['https://www.googleapis.com/auth/drive'];
 
+
+// Curried function with the drive injected
 const list = (service) => (options) => {
   return new Promise((resolve, reject) => {
-    const token = service._options.auth.credentials.access_token
+
     service.files.list(Object.assign({
       fields: 'files',
     }, options), (err, res) => {
@@ -20,17 +18,20 @@ const list = (service) => (options) => {
   })
 }
 
+// Curried function with the list function injected
 const fastSearch = list => (word, options = {}) => {
   let mergedOptions = Object.assign(options, {q: `fullText contains '${word}' or name contains '${word}'`})
   return list(mergedOptions) 
 }
 
-const download = service => (file, path = '.') => {
-  let fullPath = './' + file.name
-  var dest = fs.createWriteStream(fullPath);
+
+// Drive injected
+const download = params => (file, path = '.') => {
+  let fullPath = path + '/' + file.name.replace(/ /g, '_')
+  var dest = params.fs.createWriteStream(fullPath);
 
   return new Promise((resolve, reject) => {
-    service.files.get({
+    params.service.files.get({
       fileId: file.id,
       alt: 'media' 
     })
@@ -44,13 +45,18 @@ const download = service => (file, path = '.') => {
   })
 }
 
-exports.init = (auth) => {
+
+// Receives an authenticated oAuth2 Client
+const google = require('googleapis')
+const fs = require('fs');
+
+exports.getAuthenticatedInstance = (auth) => {
   let service = google.drive({auth: auth, version: 'v3'})
   let listConfigured = list(service)
   return {
     list: listConfigured,
     fastSearch: fastSearch(listConfigured),
-    download: download(service)
+    download: download({service: service, fs: fs})
   };
 }
 

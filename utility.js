@@ -39,8 +39,13 @@ const formatFileList = (resolve, reject, token) => (err, resp = {}) => {
 }
 
 
-const byName = (name) => file => {
-  return file.name.indexOf(name) == 0 || file.name.includes(name);
+const byName = (names) => file => {
+  return names.reduce((acc, name, idx) => {
+    if(file.name.replace(/ /g, '_').indexOf(name) == 0 || file.name.replace(/ /g,'_').includes(name))
+      acc = true 
+
+    return acc;
+  }, false)
 }
 
 module.exports = {
