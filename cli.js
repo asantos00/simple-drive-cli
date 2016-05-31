@@ -35,6 +35,7 @@ const getAvailableCommands = name => {
   let commands = {
     ls: defaultCommands.ls,
     dl: defaultCommands.dl,
+    find: defaultCommands.search,
     exit: () => process.exit(0)
   }
 

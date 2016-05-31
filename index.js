@@ -8,6 +8,7 @@ const list = (service) => (options) => {
 
     service.files.list(Object.assign({
       fields: 'files',
+      q: "mimeType != 'application/vnd.google-apps.folder'"
     }, options), (err, res) => {
       
       if(err) return reject(err)
@@ -20,7 +21,7 @@ const list = (service) => (options) => {
 
 // Curried function with the list function injected
 const fastSearch = list => (word, options = {}) => {
-  let mergedOptions = Object.assign(options, {q: `fullText contains '${word}' or name contains '${word}'`})
+  let mergedOptions = Object.assign(options, {q: `name contains '${word}' and mimeType != 'application/vnd.google-apps.folder'`})
   return list(mergedOptions) 
 }
 

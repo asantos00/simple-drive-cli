@@ -1,16 +1,34 @@
 const utility = require('./utility');
+
+const showFileList = files => {
+    files.map((file, idx) => console.log(file.name.replace(/ /g, '_')))
+    console.log('\n');
+}
 // Lists files
 exports.ls = (params) => {
-  params.drive.list()
+  let options = {};
+
+  if(params.options.f)
+    options.q = "mimeType = 'application/vnd.google-apps.folder'"
+   
+  params.drive.list(options)
     .then((resp) => {
       files = resp;
-      files.map((file, idx) => console.log(file.name.replace(/ /g, '_')))
-      console.log('\n');
+      showFileList(files)
       params.cb();
     })
     .catch(err => console.log(err))
 }
 
+exports.search = (params) => {
+  params.drive.fastSearch(params.options._[1])
+    .then((resp) => {
+      files = resp;
+      showFileList(files)
+      params.cb();
+    })
+    .catch(err => console.log(err))
+}
 
 // Download a file
 exports.dl = (params) => {

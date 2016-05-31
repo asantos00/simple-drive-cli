@@ -43,6 +43,12 @@ Lists all the files in the drive
 
 **Note**: This command should run in order to download and autocomplete to work
 
+
+## find [fileName]
+
+Searches drive with the provided fileName
+
+
 ## dl [...filesToDownload] [-p pathToDownloadTo]
 
 Downloads the files to the directory provided, if no directory is provided, downloads to current folder
